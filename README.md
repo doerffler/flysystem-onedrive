@@ -8,6 +8,8 @@ You can install the package via composer:
 `composer require justus/flysystem-onedrive`
 
 ## 2. Usage
+
+### Laravel Usage
 1. Add the following variable to the ``.env`` file
 
 ```dotenv
@@ -53,7 +55,18 @@ $disk->makeDirectory('test');
 ```php
 Storage::disk('onedrive')->makeDirectory('test');
 ```
+### PHP Usage
+Usage in default php usage without Laravel framework
+```php
+$graph = new Graph();
+$graph->setAccessToken('fd6s7a98...');
 
+$adapter = new OneDriveAdapter($graph, 'root/path', true);
+
+$filesystem = new Filesystem($adapter);
+
+$filesystem->createDirectory('test');
+```
 
 ## 3. Changelog
 Please see CHANGELOG for more information what has changed recently.
