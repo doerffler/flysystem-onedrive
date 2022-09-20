@@ -1,0 +1,40 @@
+{
+    "name": "justus/flysystem-onedrive",
+    "description": "A flysystem driver for OneDrive that uses the Microsoft Graph API",
+    "keywords": [
+        "flysystem-onedrive",
+        "flysystem",
+        "onedrive",
+        "api"
+    ],
+    "version": "",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Justus\\FlysystemOnedrive\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Justus\\FlysystemOnedrive\\Test\\": "tests"
+        }
+    },
+    "authors": [
+        {
+            "name": "Justus Donner",
+            "email": "jdonner@doerffler.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "league/flysystem": "^3.2",
+        "microsoft/microsoft-graph": "^1.74"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
