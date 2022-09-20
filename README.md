@@ -37,8 +37,6 @@ onedrive' => [
 ],
 ```
 
-4. In code usage
-
 There are two established approaches to using the package
 - On demand: Recommended for use with a dynamic graph access token. (usage e. g. session('graph_access_token'))
 ```php
@@ -56,7 +54,7 @@ $disk->makeDirectory('test');
 Storage::disk('onedrive')->makeDirectory('test');
 ```
 ### PHP Usage
-Usage in default php usage without Laravel framework
+Usage in default php without Laravel framework
 ```php
 $graph = new Graph();
 $graph->setAccessToken('fd6s7a98...');
