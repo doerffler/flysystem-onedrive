@@ -2,6 +2,8 @@
 This package contains a Flysystem OneDrive adapter, which is operated with the Microsoft Graph API.
 The adapter can also be used with the latest Laravel 9.x version.
 
+[![Latest Stable Version](http://poser.pugx.org/justus/flysystem-onedrive/v)](https://packagist.org/packages/justus/flysystem-onedrive) [![Total Downloads](http://poser.pugx.org/justus/flysystem-onedrive/downloads)](https://packagist.org/packages/justus/flysystem-onedrive) [![Latest Unstable Version](http://poser.pugx.org/justus/flysystem-onedrive/v/unstable)](https://packagist.org/packages/justus/flysystem-onedrive) [![License](http://poser.pugx.org/justus/flysystem-onedrive/license)](https://packagist.org/packages/justus/flysystem-onedrive) [![PHP Version Require](http://poser.pugx.org/justus/flysystem-onedrive/require/php)](https://packagist.org/packages/justus/flysystem-onedrive)
+
 ## 1. Installation
 You can install the package via composer:
 
