@@ -7,17 +7,17 @@
         "onedrive",
         "api"
     ],
-    "version": "",
+    "version": "v1",
     "type": "composer-plugin",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Justus\\FlysystemOnedrive\\": "src"
+            "Justus\\FlysystemOneDrive\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Justus\\FlysystemOnedrive\\Test\\": "tests"
+            "Justus\\FlysystemOneDrive\\Test\\": "tests"
         }
     },
     "authors": [

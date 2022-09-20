@@ -8,7 +8,11 @@ You can install the package via composer:
 `composer require justus/flysystem-onedrive`
 
 ## 2. Usage
-....
+### 2.1. Basic Usage
+...
+
+### 2.2. Advanced Usage
+...
 
 ## 3. Changelog
 Please see CHANGELOG for more information what has changed recently.

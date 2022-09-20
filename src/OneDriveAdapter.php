@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Packages\OneDrive;
+namespace Justus\FlysystemOneDrive;
 
 use ArrayObject;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Utils;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Config;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\DirectoryAttributes;
@@ -107,6 +105,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     /**
      * @param string $path
      * @return array
+     * @throws GuzzleException
      */
     public function readStream(string $path): array
     {
@@ -122,8 +121,8 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
             $stream = fopen($file, 'r');
 
             return compact('stream');
-        } catch (Exception|GuzzleException $e) {
-            Log::error($e);
+        } catch (Exception $e) {
+
         }
         return array();
     }
@@ -131,6 +130,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     /**
      * @param string $path
      * @return void
+     * @throws GuzzleException
      */
     public function delete(string $path): void
     {
@@ -138,14 +138,15 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
 
         try {
             $this->graph->createRequest('DELETE', $endpoint)->execute();
-        } catch (Exception|GuzzleException $e) {
-            Log::error($e);
+        } catch (Exception $e) {
+
         }
     }
 
     /**
      * @param string $path
      * @return void
+     * @throws GuzzleException
      */
     public function deleteDirectory(string $path): void
     {
@@ -156,6 +157,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
      * @param string $path
      * @param Config|null $config
      * @return void
+     * @throws GuzzleException
      */
     public function createDirectory(string $path, Config $config = null): void
     {
@@ -176,8 +178,8 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
                     'name' => end($patch),
                     'folder' => new ArrayObject(),
                 ])->execute();
-        } catch (Exception|GuzzleException $e) {
-            Log::error($e);
+        } catch (Exception $e) {
+
         }
     }
 
@@ -261,8 +263,8 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
                 }
             }
 
-        } catch (Exception|GuzzleException $e) {
-            Log::error($e);
+        } catch (Exception $e) {
+
         }
     }
 
@@ -279,7 +281,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
             $this->copy($source, $destination);
             $this->delete($source);
         } catch (Exception $e) {
-            Log::error($e);
+
         }
     }
 
@@ -311,7 +313,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
                 ->executeAsync();
             $promise->wait();
         } catch (Exception $e) {
-            Log::error($e);
+
         }
     }
 
@@ -326,8 +328,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
                 ->attachBody($result)
                 ->execute();
             return true;
-        } catch (Exception|GuzzleException $e) {
-            Log::error($e);
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -372,8 +373,8 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
                     $result);
             }
 
-        } catch (Exception|GuzzleException $e) {
-            Log::error($e);
+        } catch (Exception $e) {
+
         }
 
         return new FileAttributes('');
