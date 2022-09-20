@@ -8,11 +8,43 @@ You can install the package via composer:
 `composer require justus/flysystem-onedrive`
 
 ## 2. Usage
-### 2.1. Basic Usage
-...
+1. Add the following variable to the ``.env`` file
 
-### 2.2. Advanced Usage
-...
+```dotenv
+ONEDRIVE_ROOT=root/path
+```
+
+2. In the file ``config/filesystems.php``, please add the following code snippet in the disks section
+
+```php
+onedrive' => [
+    'driver' => 'onedrive',
+    'root' => env('ONEDRIVE_ROOT'),
+],
+```
+
+3. Add the ``OneDriveAdapterServiceProvider`` in ``config/app.php``
+
+```php
+'providers' => [
+    // ...
+    Justus\FlysystemOneDrive\Providers\OneDriveAdapterServiceProvider::class,
+    // ...
+],
+```
+
+4. Using with the Storage Facade
+
+```php
+$disk = Storage::build([
+    'driver' => config('filesystems.disks.onedrive.driver'),
+    'root' => config('filesystems.disks.onedrive.root'),
+    'use_path' => true,
+    'access_token' => '<access_token>'
+]);
+
+$disk->makeDirectory('test');
+```
 
 ## 3. Changelog
 Please see CHANGELOG for more information what has changed recently.
