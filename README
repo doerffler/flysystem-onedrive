@@ -3,17 +3,17 @@ This package contains a Flysystem OneDrive adapter, which is operated with the M
 The adapter can also be used with the latest Laravel 9.x version.
 
 ## 1. Installation
-___
+---
 You can install the package via composer:
 
 `composer require justus/flysystem-onedrive`
 
 ## 2. Usage
-___
+---
 ....
 
 ## 3. Changelog
-___
+---
 Please see CHANGELOG for more information what has changed recently.
 
 ## 4. Testing
