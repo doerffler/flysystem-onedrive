@@ -12,6 +12,7 @@ You can install the package via composer:
 
 ```dotenv
 ONEDRIVE_ROOT=root/path
+ONEDRIVE_ACCESS_TOKEN=fd6s7a98...
 ```
 
 2. In the file ``config/filesystems.php``, please add the following code snippet in the disks section
@@ -20,6 +21,7 @@ ONEDRIVE_ROOT=root/path
 onedrive' => [
     'driver' => 'onedrive',
     'root' => env('ONEDRIVE_ROOT'),
+    'access_token' => env('ONEDRIVE_ACCESS_TOKEN') //optional
 ],
 ```
 
@@ -35,6 +37,7 @@ onedrive' => [
 
 4. Using with the Storage Facade
 
+On-Demand usage
 ```php
 $disk = Storage::build([
     'driver' => config('filesystems.disks.onedrive.driver'),
