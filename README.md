@@ -21,7 +21,7 @@ Please see CHANGELOG for more information what has changed recently.
 `$ composer test`
 
 ## 5. Security
-If you discover any security related issues, please email nicolasbeauvais1@gmail.com instead of using the issue tracker.
+If you discover any security related issues, please email jdonner@doerffler.com instead of using the issue tracker.
 
 ## 6. License
 The MIT License (MIT). Please see License File for more information.
