@@ -21,7 +21,7 @@ ONEDRIVE_ACCESS_TOKEN=fd6s7a98...
 onedrive' => [
     'driver' => 'onedrive',
     'root' => env('ONEDRIVE_ROOT'),
-    'access_token' => env('ONEDRIVE_ACCESS_TOKEN') //optional
+    'access_token' => env('ONEDRIVE_ACCESS_TOKEN') //optional when on demand
 ],
 ```
 
@@ -35,19 +35,25 @@ onedrive' => [
 ],
 ```
 
-4. Using with the Storage Facade
+4. In code usage
 
-On-Demand usage
+There are two established approaches to using the package
+- On demand: Recommended for use with a dynamic graph access token. (usage e. g. session('graph_access_token'))
 ```php
 $disk = Storage::build([
     'driver' => config('filesystems.disks.onedrive.driver'),
     'root' => config('filesystems.disks.onedrive.root'),
     'use_path' => true,
-    'access_token' => '<access_token>'
+    'access_token' => session('graph_access_token')
 ]);
 
 $disk->makeDirectory('test');
 ```
+- Default with Storage Facade: Recommended for use with a "fixed" graph access token.
+```php
+Storage::disk('onedrive')->makeDirectory('test');
+```
+
 
 ## 3. Changelog
 Please see CHANGELOG for more information what has changed recently.
