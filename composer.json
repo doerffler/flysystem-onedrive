@@ -12,7 +12,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Justus\\FlysystemOneDrive\\": "src/"
+            "Justus\\FlysystemOneDrive\\": "src"
         }
     },
     "autoload-dev": {
