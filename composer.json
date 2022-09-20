@@ -8,7 +8,7 @@
         "api"
     ],
     "version": "v1",
-    "type": "composer-plugin",
+    "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
