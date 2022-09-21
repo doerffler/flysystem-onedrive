@@ -24,7 +24,7 @@ ONEDRIVE_ACCESS_TOKEN=fd6s7a98...
 2. In the file ``config/filesystems.php``, please add the following code snippet in the disks section
 
 ```php
-onedrive' => [
+'onedrive' => [
     'driver' => 'onedrive',
     'root' => env('ONEDRIVE_ROOT'),
     'access_token' => env('ONEDRIVE_ACCESS_TOKEN') //optional when on demand
