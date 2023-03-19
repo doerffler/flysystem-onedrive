@@ -18,10 +18,19 @@ Simply install the package using composer:
 ### Laravel Usage
 1. Add the following variables to your ``.env`` file
 
+example for 'personal' OneDrive
 ```dotenv
-ONEDRIVE_ROOT=root/path
+ONEDRIVE_ROOT=me
 ONEDRIVE_ACCESS_TOKEN=fd6s7a98...
+ONEDRIVE_DIR_TYPE=drives
 ```
+example for 'group shared' OneDrive
+```dotenv
+ONEDRIVE_ROOT="{group_id}/drive"
+ONEDRIVE_ACCESS_TOKEN=fd6s7a98...
+ONEDRIVE_DIR_TYPE=groups
+```
+
 
 2. In the file ``config/filesystems.php``, please add the following code snippet to the disks section
 
@@ -29,7 +38,8 @@ ONEDRIVE_ACCESS_TOKEN=fd6s7a98...
 'onedrive' => [
     'driver' => 'onedrive',
     'root' => env('ONEDRIVE_ROOT'),
-    'access_token' => env('ONEDRIVE_ACCESS_TOKEN') //optional if demanded
+    'access_token' => env('ONEDRIVE_ACCESS_TOKEN'), //optional if demanded
+    'directory_type' => env('ONEDRIVE_DIR_TYPE')
 ],
 ```
 
@@ -49,7 +59,7 @@ There are two established approaches of using the package
 $disk = Storage::build([
     'driver' => config('filesystems.disks.onedrive.driver'),
     'root' => config('filesystems.disks.onedrive.root'),
-    'use_path' => true,
+    'directory_type' => config('filesystems.disks.onedrive.directory_type'),
     'access_token' => session('graph_access_token')
 ]);
 
@@ -62,10 +72,14 @@ Storage::disk('onedrive')->makeDirectory('test');
 ### PHP Usage
 Usage in php without Laravel framework
 ```php
+$options = [
+
+];
+
 $graph = new Graph();
 $graph->setAccessToken('fd6s7a98...');
 
-$adapter = new OneDriveAdapter($graph, 'root/path', true);
+$adapter = new OneDriveAdapter($graph, 'root/path', $options);
 
 $filesystem = new Filesystem($adapter);
 

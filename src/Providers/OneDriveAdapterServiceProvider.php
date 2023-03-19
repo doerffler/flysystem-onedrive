@@ -29,9 +29,13 @@ class OneDriveAdapterServiceProvider extends ServiceProvider
     public function boot()
     {
         Storage::extend('onedrive', function ($app, $config) {
+            $options = [
+                'directory_type' => $config['directory_type'],
+            ];
+
             $graph = new Graph();
             $graph->setAccessToken($config['access_token']);
-            $adapter = new OneDriveAdapter($graph, $config['root'], $config['use_path']);
+            $adapter = new OneDriveAdapter($graph, $config['root'], $options);
 
             return new FilesystemAdapter(
                 new Filesystem($adapter, $config),
