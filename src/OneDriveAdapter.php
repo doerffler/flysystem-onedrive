@@ -22,6 +22,7 @@ use Microsoft\Graph\Model\DriveItem;
 use Microsoft\Graph\Model\File;
 use Microsoft\Graph\Model\UploadSession;
 use stdClass;
+use GuzzleHttp\Psr7\Utils;
 
 class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapter
 {
@@ -296,13 +297,11 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
             }
             $download_url = $driveItem->getProperties()['@microsoft.graph.downloadUrl'];
 
-            $http = new Http();
-            $response = $http->get(
-                $download_url,
+            $response = Http::get(
+                $download_url
             );
 
-            $stream = StreamWrapper::getResource($response->body());
-
+            $stream = StreamWrapper::getResource(Utils::streamFor($response->body()));
             return compact('stream');
         } catch (Exception $e) {
             throw new Exception($e);
