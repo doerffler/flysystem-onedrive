@@ -154,7 +154,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
 
     private function getUploadSessionUrl(string $path): string
     {
-        return "/$this->options['directory_type']/$this->drive/items/root:/$path:/createUploadSession";
+        return "/{$this->options['directory_type']}/$this->drive/items/root:/$path:/createUploadSession";
     }
 
     /**
