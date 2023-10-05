@@ -203,14 +203,10 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
             'Content-Length' => strlen($chunk),
         ];
 
-        $response = $http->put(
-            $upload_url,
-            [
-                'headers' => $headers,
-                'body' => $chunk,
-                'timeout' => $this->options['request_timeout'],
-            ]
-        );
+        $response = $http::withHeaders($headers)
+            ->withBody($chunk,'application/octet-stream')
+            ->timeout($this->options['request_timeout'])
+            ->put($upload_url);
 
         if ($response->status() === 404) {
             throw new Exception('Upload URL has expired, please create new upload session');
