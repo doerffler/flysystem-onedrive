@@ -74,8 +74,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @return bool
      * @throws Exception|GuzzleException
      */
     public function fileExists(string $path): bool
@@ -118,10 +116,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @param string $contents
-     * @param Config|null $config
-     * @return void
      * @throws Exception|GuzzleException
      */
     public function write(string $path, string $contents, Config $config = null): void
@@ -167,10 +161,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
      * @param $contents
-     * @param Config|null $config
-     * @return void
      * @throws Exception|GuzzleException
      */
     public function writeStream(string $path, $contents, Config $config = null): void
@@ -255,8 +246,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @return string
      * @throws Exception|GuzzleException
      */
     public function read(string $path): string
@@ -276,7 +265,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
      * @return array
      * @throws GuzzleException
      * @throws Exception
@@ -305,8 +293,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @return void
      * @throws GuzzleException
      * @throws Exception
      */
@@ -328,8 +314,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @return void
      * @throws GuzzleException
      * @throws Exception
      */
@@ -343,13 +327,10 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @param Config|null $config
-     * @return void
      * @throws GuzzleException
      * @throws Exception
      */
-    public function createDirectory(string $path, Config $config = null): void
+    public function createDirectory(string $path, ?Config $config = null): void
     {
         try {
             $newDirPathArray = explode('/', $path);
@@ -375,9 +356,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @param string $visibility
-     * @return void
      * @throws Exception
      */
     public function setVisibility(string $path, string $visibility): void
@@ -386,8 +364,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @return FileAttributes
      * @throws Exception
      */
     public function visibility(string $path): FileAttributes
@@ -396,8 +372,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @return FileAttributes
      * @throws Exception|GuzzleException
      */
     public function mimeType(string $path): FileAttributes
@@ -420,8 +394,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @return FileAttributes
      * @throws Exception|GuzzleException
      */
     public function lastModified(string $path): FileAttributes
@@ -442,8 +414,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $path
-     * @return FileAttributes
      * @throws Exception|GuzzleException
      */
     public function fileSize(string $path): FileAttributes
@@ -463,12 +433,9 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
 
 
     /**
-     * @param string $path
-     * @param bool $deep
      * @return iterable
      * @throws Exception|GuzzleException
      */
-
     public function listContents(string $path, bool $deep = true): iterable
     {
         try {
@@ -500,6 +467,10 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
         }
     }
 
+    /**
+     * @param DriveItem[] $drive_items
+     * @return array<int, FileAttributes|DirectoryAttributes>
+     */
     private function convertDriveItemsToStorageAttributes(array $drive_items): array
     {
         return array_map(function (DriveItem $item) {
@@ -539,10 +510,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $source
-     * @param string $destination
-     * @param Config|null $config
-     * @return void
      * @throws Exception
      */
     public function move(string $source, string $destination, Config $config = null): void
@@ -578,10 +545,6 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @param string $source
-     * @param string $destination
-     * @param Config|null $config
-     * @return void
      * @throws Exception
      */
     public function copy(string $source, string $destination, Config $config = null): void
