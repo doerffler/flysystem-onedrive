@@ -10,14 +10,6 @@ use Orchestra\Testbench\TestCase;
 class OneDriveTestCase extends TestCase
 {
     /**
-     * Setup the test environment.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    /**
      * Get package providers.
      *
      * @param  Application  $app
