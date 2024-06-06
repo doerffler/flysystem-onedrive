@@ -11,7 +11,9 @@ You can use this package to access files stored in onedrive or sharepoint folder
 ## 1. Installation
 Simply install the package using composer:
 
-`composer require justus/flysystem-onedrive`
+```bash
+composer require justus/flysystem-onedrive
+```
 
 ## 2. Usage
 
@@ -90,7 +92,9 @@ $filesystem->createDirectory('test');
 Please see CHANGELOG for more information on recent changes.
 
 ## 4. Testing
-`$ composer test`
+```bash
+composer test
+```
 
 ## 5. Security
 If you discover any security related issues, please write an email to jdonner@doerffler.com instead of using the issue tracker.
