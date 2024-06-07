@@ -7,9 +7,6 @@ use Justus\FlysystemOneDrive\Test\OneDriveTestCase;
 
 class OneDriveTest extends OneDriveTestCase
 {
-    /**
-     * A basic test example.
-     */
     public function test_basic_test(): void
     {
         $disk = Storage::build([
