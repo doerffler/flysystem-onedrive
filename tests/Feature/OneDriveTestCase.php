@@ -1,6 +1,6 @@
 <?php
 
-namespace Justus\FlysystemOneDrive\Test;
+namespace Justus\FlysystemOneDrive\Test\Feature;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
