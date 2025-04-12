@@ -265,11 +265,11 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
     }
 
     /**
-     * @return array
+     * @return resource
      * @throws GuzzleException
      * @throws Exception
      */
-    public function readStream(string $path): array
+    public function readStream(string $path)
     {
         try {
             $path = $this->getUrlToPath($path);
@@ -285,8 +285,7 @@ class OneDriveAdapter extends OneDriveUtilityAdapter implements FilesystemAdapte
                 $download_url
             );
 
-            $stream = StreamWrapper::getResource(Utils::streamFor($response->body()));
-            return compact('stream');
+            return StreamWrapper::getResource(Utils::streamFor($response->body()));
         } catch (Exception $e) {
             throw new Exception($e);
         }
