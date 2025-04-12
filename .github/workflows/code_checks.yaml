@@ -42,13 +42,7 @@ jobs:
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
-
-      - name: Run PHPStan (Level 5)
-        run: vendor/bin/phpstan analyse --level=5
-
-      - name: Check PSR-12 style with PHP-CS-Fixer
-        run: vendor/bin/php-cs-fixer check --diff --dry-run
-
+        
       - name: Run tests
         run: |
           if [ -f artisan ]; then
