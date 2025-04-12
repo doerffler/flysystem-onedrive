@@ -7,7 +7,6 @@
         "onedrive",
         "api"
     ],
-    "version": "v2.0.6",
     "type": "library",
     "license": "MIT",
     "autoload": {
