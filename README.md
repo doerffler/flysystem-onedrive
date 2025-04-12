@@ -2,7 +2,7 @@
 
 # Flysystem adapter for Microsoft OneDrive
 This package contains a Flysystem OneDrive adapter, which makes use of the Microsoft Graph API.
-The adapter is ready for the latest Laravel 9.x version.
+The adapter is ready for the latest Laravel 12.x version.
 
 You can use this package to access files stored in onedrive or sharepoint folders from your PHP or Laravel web applications.
 
