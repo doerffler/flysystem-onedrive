@@ -1,39 +1,58 @@
 # .github/workflows/code_checks.yaml
-name: Code_Checks
+name: Code Checks
 
-on: ["push", "pull_request"]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   tests:
+    name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
     runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
       matrix:
         php: ['8.2', '8.3']
         stability: [prefer-stable]
-        # Entferne PHP 8.1, da Laravel 11+ und 12.x PHP 8.2 oder höher erfordern.
-        # Wenn du eine Version <= PHP 8.1 verwenden möchtest, musst du eventuell auf Laravel 10 downgraden.
 
-    name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
     steps:
-      # Git-Checkout
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Cache dependencies
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, mbstring
+          coverage: pcov
+          tools: composer:v2, phpstan, php-cs-fixer
+
+      - name: Cache Composer dependencies
         uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
-          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
-
-      # PHP-Version einrichten
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: curl
-          coverage: pcov
+          key: composer-${{ matrix.php }}-${{ matrix.stability }}-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            composer-${{ matrix.php }}-${{ matrix.stability }}-
 
       - name: Install dependencies
-        run: composer update --no-interaction --prefer-dist
+        run: composer update --${{ matrix.stability }} --no-interaction --prefer-dist
 
-      - name: Execute tests
-        run: vendor/bin/phpunit
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Run PHPStan (Level 5)
+        run: vendor/bin/phpstan analyse --level=5
+
+      - name: Check PSR-12 style with PHP-CS-Fixer
+        run: vendor/bin/php-cs-fixer check --diff --dry-run
+
+      - name: Run tests
+        run: |
+          if [ -f artisan ]; then
+            php artisan test --no-interaction
+          else
+            vendor/bin/phpunit --colors=always
+          fi
