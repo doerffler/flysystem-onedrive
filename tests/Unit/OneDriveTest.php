@@ -70,4 +70,31 @@ class OneDriveTest extends OneDriveTestCase
             'directory_type' => 'drives',
         ]);
     }
+
+    public function test_refreshes_an_expired_token_on_a_long_lived_disk(): void
+    {
+        Cache::flush();
+        Http::preventStrayRequests();
+        Http::fake([
+            'login.microsoftonline.com/*' => Http::sequence()
+                ->push(['access_token' => 'first-token', 'expires_in' => 3600])
+                ->push(['access_token' => 'second-token', 'expires_in' => 3600]),
+        ]);
+
+        $disk = Storage::build([
+            'driver' => 'onedrive',
+            'root' => 'test-drive',
+            'directory_type' => 'drives',
+            'tenant_id' => 'tenant-one',
+            'client_id' => 'client-one',
+            'secret' => 'test-secret',
+        ]);
+        $graph = (fn () => $this->graph)->call($disk->getAdapter());
+
+        $this->travel(2)->hours();
+        $request = $graph->createRequest('GET', '/me');
+
+        Http::assertSentCount(2);
+        self::assertSame('Bearer second-token', $request->getHeaders()['Authorization']);
+    }
 }
